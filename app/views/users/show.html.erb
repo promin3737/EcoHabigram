@@ -1,2 +1,30 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="profile-wrap">
+  <div class="row">
+    <div class="col-md-4 text-center">
+      <%= attachment_image_tag @user, :profile_image ,fallback: "icon.png" ,size:'150x150'%>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <h1><%= @user.name %></h1>
+        <%= link_to "プロフィールを編集", edit_user_path, class: "btn btn-outline-dark common-btn edit-profile-btn" %>
+      </div>
+      <div class="row">
+        <p><%= @user.introduction %></p>
+      </div>
+      <% if @user == current_user %>
+        <div class="row">
+          <p>
+            <%= @user.email %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% @post_images.each do |post_image| %>
+    <div>
+      <%= link_to post_image_path(post_image.id) do %>
+        <%= attachment_image_tag post_image, :image ,size:'300x300' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
