@@ -1,6 +1,7 @@
 class PostImagesController < ApplicationController
   def new
     @post_image = PostImage.new
+    @user = current_user
   end
 
   def create
