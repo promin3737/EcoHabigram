@@ -11,7 +11,7 @@ class PostImagesController < ApplicationController
   end
 
   def index
-    @post_images = PostImage.all
+    @post_images = PostImage.limit(10).order('created_at DESC')
   end
 
   def show
