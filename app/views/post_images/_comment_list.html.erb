@@ -1,0 +1,17 @@
+<% post.comments.each do |comment| %>
+  <div class="row">
+    <div class="col-md-11">
+      <span>
+        <strong>
+          <%= link_to comment.user.name, user_path(comment.user), class: "no-text-decoration black-color" %>
+        </strong>
+      </span>
+      <span><%= comment.comment %></span>
+    </div>
+    <div class="col-md-1">
+      <% if comment.user == current_user %>
+        <%= link_to "", post_image_comment_path(post.id, comment), method: :delete, remote: true, class: "fas fa-times" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

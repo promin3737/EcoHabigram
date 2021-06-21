@@ -1,0 +1,2 @@
+$('#comment-post-<%= @post_image.id.to_s %>').
+  html('<%= j render "post_images/comment_list", { post: @post_image } %>');

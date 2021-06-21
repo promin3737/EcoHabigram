@@ -18,21 +18,44 @@
         </span>
         <div class="card-body">
           <div class="row parts">
-            <%= link_to "", "#", class: "love" %>
-            <%= link_to "", "#", class: "comment" %>
+            <div id="like-icon-post-<%= post.id.to_s %>">
+              <% if post.liked_by(current_user).present? %>
+                <%= link_to "", post_image_like_path(post.id, post.liked_by(current_user)), method: :DELETE, remote: true, class:"fas fa-heart", style:"color: red; font-size: 2.0em;" %>
+                <!--<i class="far fa-comment"></i>-->
+                <!--<i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>-->
+              <% else %>
+                <%= link_to "", post_image_likes_path(post), method: :POST, remote: true, class:"far fa-heart", style:"font-size: 2.0em;" %>
+                <!--<i class="far fa-comment"></i>-->
+                <!--<i class="far fa-heart" aria-hidden="true"></i>-->
+              <% end %>
+            </div>
+            <%#= link_to "", "#", class: "comment" %>
           </div>
-          <div><strong>「いいね！」10件</strong></div>
+          <div id="like-text-post-<%= post.id.to_s %>">
+            <%= render "like_text", { likes: post.likes } %>
+          </div>
           <div>
-            <span><strong><%= post.user.name %></strong></span>
+            <span><strong><%= post.user.name %></strong></span><br>
             <span><%= post.caption %></span>
-            <%= link_to time_ago_in_words(post.created_at).upcase + "前", "#", class: "post-time no-text-decoration" %>
+            <%= link_to time_ago_in_words(post.created_at).upcase + "前", post_image_path(post), class: "post-time no-text-decoration" %>
             <hr>
-            <div class="row parts">
-              <form action="#" class="w-100">
-                <div>
-                  <textarea class="form-control comment-input border-0" placeholder="コメント..." rows="1"></textarea>
-                </div>
-              </form>
+            <div id="comment-post-<%= post.id.to_s %>">
+              <%= render 'comment_list', { post: post } %>
+            </div>
+            <%#= link_to time_ago_in_words(post.created_at).upcase + "前", post_image_path(post),
+              class: "light-color post-time no-text-decoration" %>
+            <hr>
+            <div class="row actions" id="comment-form-post-<%= post.id.to_s %>">
+              <div class="col-md-10">
+                <%= form_with model: [post, Comment.new], class: "w-100" do |f| %>
+                  <%= f.hidden_field :user_id, value: current_user.id %>
+                  <%= f.hidden_field :post_image_id, value: post.id %>
+                  <%= f.text_field :comment, class: "form-control comment-input border-0", placeholder: "コメントを追加 ...", autocomplete: :off %>
+              </div>
+              <div class="col-md-2">
+                  <%= f.submit "コメント投稿", class:"btn btn-info" %>
+              </div>
+                <% end %>
             </div>
           </div>
         </div>

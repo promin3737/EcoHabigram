@@ -1,0 +1,6 @@
+$('#like-icon-post-<%= @post_image.id.to_s %>').
+  html('<%= link_to "", post_image_like_path(@post_image.id, @like), method: :DELETE, remote: true, class:"fas fa-heart", style:"color: red; font-size: 2.0em;" %>');
+<!--$('#like-icon-post-<%#= @post_image.id.to_s %>').-->
+  <!--html('<i class="far fa-comment"></i>');-->
+$('#like-text-post-<%= @post_image.id.to_s %>').
+  html('<%= j render "post_images/like_text", { likes: @post_image.likes } %>');

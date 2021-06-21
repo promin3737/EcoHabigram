@@ -24,17 +24,48 @@
               <%= @post_image.caption %>
             </strong>
           </div>
+          <hr>
           <div class="comment-post-id">
             <div class="m-2">
+              <div id="comment-post-<%= @post_image.id.to_s %>">
+                <%= render 'comment_list', post: @post_image %>
+              </div>
             </div>
           </div>
         </div>
         <div class="row parts">
+          <div id="like-icon-post-<%= @post_image.id.to_s %>">
+            <% if @post_image.liked_by(current_user).present? %>
+              <%= link_to "", post_image_like_path(@post_image.id, @post_image.liked_by(current_user)), method: :DELETE, remote: true, class:"fas fa-heart", style:"color: red; font-size: 2.0em;" %>
+              <!--<i class="far fa-comment"></i>-->
+              <!--<i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>-->
+            <% else %>
+              <%= link_to "", post_image_likes_path(@post_image), method: :POST, remote: true, class:"far fa-heart", style:"font-size: 2.0em;" %>
+              <!--<i class="far fa-comment"></i>-->
+              <!--<i class="far fa-heart" aria-hidden="true"></i>-->
+            <% end %>
+          </div>
+        </div>
+        <div id="like-text-post-<%= @post_image.id.to_s %>">
+          <%= render "like_text", { likes: @post_image.likes } %>
         </div>
         <div class="post-time"><%= time_ago_in_words(@post_image.created_at).upcase %>前</div>
         <hr>
+        <div class="row parts" id="comment-form-post-<%= @post_image.id.to_s %>">
+          <div class="col-md-10">
+            <%= form_with model: [@post_image, Comment.new], class: "w-100" do |f| %>
+              <%= f.hidden_field :user_id, value: current_user.id %>
+              <%= f.hidden_field :post_image_id, value: @post_image.id %>
+              <%= f.text_field :comment, class: "form-control comment-input border-0", placeholder: "コメントを追加 ...", autocomplete: :off %>
+          </div>
+          <div class="col-md-2">
+              <%= f.submit "投稿", class:"btn btn-info" %>
+          </div>
+            <% end %>
+        </div>
+        <hr>
         <% if @post_image.user == current_user %>
-          <%= link_to "削除", post_image_path(@post_image), method: :delete %>
+          <%= link_to "投稿の削除", post_image_path(@post_image), method: :delete, class:"btn btn-danger"%>
         <% end %>
       </div>
     </div>
