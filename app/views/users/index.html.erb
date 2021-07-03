@@ -1,2 +1,17 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<div class="matching">
+    <p class="matching-title ml-3">メッセージ</p>
+    <div class="matching__list">
+      <% unless @users.empty? %>
+        <% @users.each do |user| %>
+        <%= link_to chat_rooms_path(params: { user_id: user.id }), method: :post do %>
+         <div class="matching__person">
+             <%= attachment_image_tag @user, :profile_image ,fallback: "icon.png" ,size:'150x150', class: "round-img" %>
+           <div class="matching__person-name">
+             <%= user.name %>
+           </div>
+         </div>
+         <% end %>
+        <% end %>
+      <% end %>
+    </div>
+</div>

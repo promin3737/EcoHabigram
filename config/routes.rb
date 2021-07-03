@@ -6,4 +6,5 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end
+  resources :chat_rooms, only: [:create, :show]
 end
