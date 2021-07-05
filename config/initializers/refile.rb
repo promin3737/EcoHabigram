@@ -1,4 +1,4 @@
-require 'refile/s3'
+require 'refile'
 
 if Rails.env.production? # 本番環境の場合はS3へアップロード
   aws = {
