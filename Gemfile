@@ -73,6 +73,8 @@ gem 'carrierwave', '~> 2.0'
 gem 'font-awesome-sass', '~> 5.13'
 gem 'execjs'
 gem "aws-sdk-s3", require: false
+gem 'dotenv-rails'
+gem 'fog-aws'
 
 group :production do
   gem 'pg', '>= 0.18', '< 2.0'
