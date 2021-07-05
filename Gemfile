@@ -68,13 +68,14 @@ gem 'jquery-rails'
 gem 'devise'
 
 gem "refile", require: "refile/rails", github: 'manfe/refile'
+gem "refile-s3"
 gem "refile-mini_magick"
 gem 'carrierwave', '~> 2.0'
 gem 'font-awesome-sass', '~> 5.13'
 gem 'execjs'
-gem "aws-sdk-s3", require: false
+# gem "aws-sdk-s3", require: false
 gem 'dotenv-rails'
-gem 'fog-aws'
+# gem 'fog-aws'
 group :production do
   gem 'pg', '>= 0.18', '< 2.0'
 end
