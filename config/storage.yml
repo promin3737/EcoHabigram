@@ -33,9 +33,9 @@ local:
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
 
-# amazon:
-#   service: S3
-#   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-#   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-#   region: ap-northeast-3 #大阪
-#   bucket: ecohabigram #自分で作成したS3のバケットの名前
+amazon:
+  service: S3
+  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+  region: ap-northeast-3 #大阪
+  bucket: ecohabigram #自分で作成したS3のバケットの名前
