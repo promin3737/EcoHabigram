@@ -73,7 +73,7 @@ gem "refile-mini_magick"
 gem 'carrierwave', '~> 2.0'
 gem 'font-awesome-sass', '~> 5.13'
 gem 'execjs'
-# gem "aws-sdk-s3", require: false
+# gem "aws-sdk-s3"
 gem 'dotenv-rails'
 # gem 'fog-aws'
 group :production do
